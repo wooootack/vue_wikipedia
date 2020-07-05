@@ -20,7 +20,7 @@
 
 <script>
 import 'normalize.css'
-import Tree from '@/views/Tree'
+import Tree from '@/components/organisms/Tree'
 
 export default {
   name: 'App',
@@ -40,12 +40,13 @@ export default {
 
 .tree-box {
   width: 300px;
-  margin: 0 1%;
   height: 100%;
+  margin: 0 1em;
 }
 
 .main-container {
   flex: 1;
+  margin-right: 1em;
 }
 
 </style>
