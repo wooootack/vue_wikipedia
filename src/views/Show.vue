@@ -4,40 +4,47 @@
       <TabItem
         v-for="item in list"
         v-bind="item" :key="item.id"
-        v-model="currentId"/>
+        v-model="currentId"
+        @tabClose="tabClose" />
     </div>
     <div class="contents">
-      <span class="markdown-body" v-html="compiledMarkdownBody"></span>
+      <MarkdownViewer
+        :body="currentBody" />
     </div>
   </div>
 </template>
 
 <script>
 import TabItem from '@/components/organisms/TabItem.vue'
-import marked from 'marked'
+import MarkdownViewer from '@/components/organisms/MarkdownViewer'
 
 export default {
   components:
   {
-    TabItem
+    TabItem,
+    MarkdownViewer
   },
   data () {
     return {
       currentId: 1,
       list: [
-        { id: 1, label: '使い方', content: 'コンテンツ1' },
-        { id: 2, label: '開発環境', content: 'コンテンツ2' },
-        { id: 3, label: 'メモ', content: 'コンテンツ3' }
-      ],
-      body: ''
+        { id: 1, label: '使い方', body: '# test \n- test1' },
+        { id: 2, label: '開発環境', body: '# test \n- test2' },
+        { id: 3, label: 'メモ', body: '# test \n- test3' }
+      ]
     }
   },
   computed: {
     current () {
       return this.list.find(el => el.id === this.currentId) || {}
     },
-    compiledMarkdownBody: function () {
-      return marked(this.body)
+    currentBody () {
+      return this.list.find(el => el.id === this.currentId).body
+    }
+  },
+  methods: {
+    tabClose (id) {
+      this.list = this.list.filter(x => x.id !== id)
     }
   }
 }
@@ -51,11 +58,11 @@ export default {
 }
 
 .contents {
+  padding: 1em;
   position: relative;
   overflow: hidden;
   width: 100%;
   height: 100%;
-  background: #eeeeee;
 }
 
 .item {
