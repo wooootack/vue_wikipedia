@@ -1,7 +1,7 @@
 
 <template>
-  <button @click="$emit('input', id)" :class="[active, 'tab']">
-    <span class="title">{{ label }}</span>
+  <button :class="[active, 'tab']">
+    <span @click="select(id)" class="title">{{ title }}</span>
     <span @click="close(id)" class="close">×</span>
   </button>
 </template>
@@ -10,17 +10,20 @@
 export default {
   props: {
     id: Number,
-    label: String,
+    title: String,
     value: Number
   },
   computed: {
     active () {
-      return this.value === this.id ? 'active' : false
+      return this.$store.state.list.find(x => x.selected).id === this.id ? 'active' : false
     }
   },
   methods: {
     close (id) {
       this.$emit('tabClose', id)
+    },
+    select (id) {
+      this.$store.commit('selectDocument', id)
     }
   }
 }
@@ -38,20 +41,26 @@ button:focus {
   background: #fff;
   color: #311d0a;
   padding: 0.5em 1em 0.5em 1em;
+  background: #eeeeee;
+}
+
+.title {
+  cursor: pointer;
 }
 
 button:hover {
-  background: #eeeeee;
+  background: #FFFFFF;
 }
 
 .active {
-  background: #eeeeee;
+  background: #FFFFFF;
 }
 
 .close {
   display: inline-block;
   font-weight: bold;
   margin-left: 0.5em;
+  cursor: pointer;
 }
 
 </style>

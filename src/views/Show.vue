@@ -2,9 +2,8 @@
   <div class="home-container">
     <div class="tabs">
       <TabItem
-        v-for="item in list"
+        v-for="item in openedDocument"
         v-bind="item" :key="item.id"
-        v-model="currentId"
         @tabClose="tabClose" />
     </div>
     <div class="contents">
@@ -24,27 +23,20 @@ export default {
     TabItem,
     MarkdownViewer
   },
-  data () {
-    return {
-      currentId: 1,
-      list: [
-        { id: 1, label: '使い方', body: '# test \n- test1' },
-        { id: 2, label: '開発環境', body: '# test \n- test2' },
-        { id: 3, label: 'メモ', body: '# test \n- test3' }
-      ]
-    }
-  },
   computed: {
-    current () {
-      return this.list.find(el => el.id === this.currentId) || {}
-    },
     currentBody () {
-      return this.list.find(el => el.id === this.currentId).body
+      if (this.$store.state.list.find(x => x.opend && x.selected) === undefined) {
+        return ''
+      }
+      return this.$store.state.list.find(x => x.opend && x.selected).body
+    },
+    openedDocument () {
+      return this.$store.state.list.filter(x => x.opend)
     }
   },
   methods: {
     tabClose (id) {
-      this.list = this.list.filter(x => x.id !== id)
+      this.$store.commit('closeDocument', id)
     }
   }
 }
