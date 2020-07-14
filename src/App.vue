@@ -10,6 +10,8 @@
 
     <div class="main-container">
 
+      <Header />
+
       <router-view/>
 
     </div>
@@ -21,11 +23,13 @@
 <script>
 import 'normalize.css'
 import Tree from '@/components/organisms/Tree'
+import Header from '@/components/organisms/Header'
 
 export default {
   name: 'App',
   components: {
-    Tree
+    Tree,
+    Header
   }
 }
 </script>
@@ -41,7 +45,9 @@ export default {
 .tree-box {
   width: 300px;
   height: 100%;
-  margin: 0 1em;
+  padding: 0 1em;
+  margin: 0;
+  background-color: #f5f5f5;
 }
 
 .main-container {

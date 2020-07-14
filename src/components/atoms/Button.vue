@@ -1,12 +1,18 @@
 <template>
-  <router-link :to="{name: name}" class="btn-border">{{ text }}</router-link>
+  <router-link to="" @click.native="click()" class="btn-border">{{ text }}</router-link>
 </template>
 
 <script>
 export default {
+
   props: {
-    text: String,
-    name: String
+    text: String
+  },
+
+  methods: {
+    click () {
+      this.$emit('click-event')
+    }
   }
 }
 </script>

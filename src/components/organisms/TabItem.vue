@@ -15,7 +15,7 @@ export default {
   },
   computed: {
     active () {
-      return this.$store.state.list.find(x => x.selected).id === this.id ? 'active' : false
+      return this.$store.state.selectDocumentId === this.id ? 'active' : false
     }
   },
   methods: {
