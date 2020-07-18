@@ -1,5 +1,7 @@
 <template>
+<div>
     <Tree :data="data5" :render="renderContent" class="demo-tree-render"></Tree>
+    </div>
 </template>
 <script>
 export default {
@@ -7,7 +9,7 @@ export default {
     return {
       data5: [
         {
-          title: 'parent 1',
+          title: 'documents',
           expand: true,
           render: (h, { root, node, data }) => {
             return h('span', {
@@ -22,7 +24,7 @@ export default {
                     type: 'ios-folder-outline'
                   },
                   style: {
-                    marginRight: '8px'
+                    marginRight: '0.5em'
                   }
                 }),
                 h('span', data.title)
@@ -31,22 +33,9 @@ export default {
                 style: {
                   display: 'inline-block',
                   float: 'right',
-                  marginRight: '32px'
+                  marginRight: '2.3em'
                 }
-              }, [
-                h('Button', {
-                  props: Object.assign({}, this.buttonProps, {
-                    icon: 'ios-add',
-                    type: 'primary'
-                  }),
-                  style: {
-                    width: '64px'
-                  },
-                  on: {
-                    click: () => { this.append(data) }
-                  }
-                })
-              ])
+              })
             ])
           },
           children: [
@@ -80,11 +69,7 @@ export default {
             }
           ]
         }
-      ],
-      buttonProps: {
-        type: 'default',
-        size: 'small'
-      }
+      ]
     }
   },
   methods: {
@@ -98,10 +83,10 @@ export default {
         h('span', [
           h('Icon', {
             props: {
-              type: 'ios-paper-outline'
+              type: this.getIcon(data)
             },
             style: {
-              marginRight: '8px'
+              marginRight: '0.5em'
             }
           }),
           h('span', data.title)
@@ -110,32 +95,15 @@ export default {
           style: {
             display: 'inline-block',
             float: 'right',
-            marginRight: '32px'
+            marginRight: '2.3em'
           }
-        }, [
-          h('Button', {
-            props: Object.assign({}, this.buttonProps, {
-              icon: 'ios-add'
-            }),
-            style: {
-              marginRight: '8px'
-            },
-            on: {
-              click: () => { this.append(data) }
-            }
-          }),
-          h('Button', {
-            props: Object.assign({}, this.buttonProps, {
-              icon: 'ios-remove'
-            }),
-            on: {
-              click: () => { this.remove(root, node, data) }
-            }
-          })
-        ])
+        })
       ])
     },
     append (data) {
+      if (!confirm('追加しますか？')) {
+        return
+      }
       const children = data.children || []
       children.push({
         title: 'appended node',
@@ -144,10 +112,20 @@ export default {
       this.$set(data, 'children', children)
     },
     remove (root, node, data) {
+      if (!confirm('削除しますか？')) {
+        return
+      }
       const parentKey = root.find(el => el === node).parent
       const parent = root.find(el => el.nodeKey === parentKey).node
       const index = parent.children.indexOf(data)
       parent.children.splice(index, 1)
+    },
+    getIcon (data) {
+      if (data.children === undefined || data.children.length === 0) {
+        return 'ios-paper-outline'
+      } else {
+        return 'ios-folder-outline'
+      }
     }
   }
 }
