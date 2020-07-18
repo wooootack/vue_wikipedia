@@ -9,6 +9,7 @@ import 'mavon-editor/dist/markdown/github-markdown.min.css'
 import 'mavon-editor/dist/highlightjs/highlight.min.js'
 import 'mavon-editor/dist/katex/katex.min.css'
 import 'mavon-editor/dist/katex/katex.min.js'
+import './plugins/iview.js'
 
 Vue.use(mavonEditor)
 
