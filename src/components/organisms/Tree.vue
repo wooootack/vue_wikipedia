@@ -1,13 +1,13 @@
 <template>
-<div>
-    <Tree :data="data5" :render="renderContent" class="demo-tree-render"></Tree>
+<div class="container" @click.right.prevent="openMenu">
+    <Tree :data="data" :render="renderContent" class="demo-tree-render"></Tree>
     </div>
 </template>
 <script>
 export default {
   data () {
     return {
-      data5: [
+      data: [
         {
           title: 'documents',
           expand: true,
@@ -45,13 +45,18 @@ export default {
               children: [
                 {
                   title: 'leaf 1-1-1',
-                  expand: true
+                  expand: true,
+                  children: [],
+                  isFolder: false
                 },
                 {
                   title: 'leaf 1-1-2',
-                  expand: true
+                  expand: true,
+                  children: [],
+                  isFolder: false
                 }
-              ]
+              ],
+              isFolder: true
             },
             {
               title: 'child 1-2',
@@ -59,13 +64,18 @@ export default {
               children: [
                 {
                   title: 'leaf 1-2-1',
-                  expand: true
+                  expand: true,
+                  children: [],
+                  isFolder: false
                 },
                 {
                   title: 'leaf 1-2-1',
-                  expand: true
+                  expand: true,
+                  children: [],
+                  isFolder: false
                 }
-              ]
+              ],
+              isFolder: true
             }
           ]
         }
@@ -121,17 +131,24 @@ export default {
       parent.children.splice(index, 1)
     },
     getIcon (data) {
-      if (data.children === undefined || data.children.length === 0) {
-        return 'ios-paper-outline'
-      } else {
+      if (data.isFolder) {
         return 'ios-folder-outline'
+      } else {
+        return 'ios-paper-outline'
       }
+    },
+    openMenu () {
+      console.log('TEST')
     }
   }
 }
 </script>
 <style>
-    .demo-tree-render .ivu-tree-title{
-        width: 100%;
-    }
+  .demo-tree-render .ivu-tree-title{
+      width: 100%;
+  }
+  .container {
+    height: 100%;
+    user-select: none;
+  }
 </style>
