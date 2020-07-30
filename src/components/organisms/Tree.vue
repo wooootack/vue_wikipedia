@@ -1,10 +1,20 @@
 <template>
-<div class="container" @click.right.prevent="openMenu">
+  <div class="container" @contextmenu.prevent="$refs.ctxMenu.open">
     <Tree :data="data" :render="renderContent" class="demo-tree-render"></Tree>
-    </div>
+    <context-menu id="context-menu" ref="ctxMenu">
+      <li class="menu-item">新規フォルダ</li>
+      <li class="menu-item">新規ファイル</li>
+      <li class="menu-item"></li>
+    </context-menu>
+  </div>
 </template>
 <script>
+import contextMenu from 'vue-context-menu'
+
 export default {
+  components: {
+    contextMenu
+  },
   data () {
     return {
       data: [
@@ -136,9 +146,6 @@ export default {
       } else {
         return 'ios-paper-outline'
       }
-    },
-    openMenu () {
-      console.log('TEST')
     }
   }
 }
@@ -150,5 +157,8 @@ export default {
   .container {
     height: 100%;
     user-select: none;
+  }
+  .menu-item {
+    margin: 0 0 0.1em 0.5em;
   }
 </style>
