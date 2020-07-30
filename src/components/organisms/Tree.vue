@@ -15,83 +15,6 @@ export default {
   components: {
     contextMenu
   },
-  data () {
-    return {
-      data: [
-        {
-          title: 'documents',
-          expand: true,
-          render: (h, { root, node, data }) => {
-            return h('span', {
-              style: {
-                display: 'inline-block',
-                width: '100%'
-              }
-            }, [
-              h('span', [
-                h('Icon', {
-                  props: {
-                    type: 'ios-folder-outline'
-                  },
-                  style: {
-                    marginRight: '0.5em'
-                  }
-                }),
-                h('span', data.title)
-              ]),
-              h('span', {
-                style: {
-                  display: 'inline-block',
-                  float: 'right',
-                  marginRight: '2.3em'
-                }
-              })
-            ])
-          },
-          children: [
-            {
-              title: 'child 1-1',
-              expand: true,
-              children: [
-                {
-                  title: 'leaf 1-1-1',
-                  expand: true,
-                  children: [],
-                  isFolder: false
-                },
-                {
-                  title: 'leaf 1-1-2',
-                  expand: true,
-                  children: [],
-                  isFolder: false
-                }
-              ],
-              isFolder: true
-            },
-            {
-              title: 'child 1-2',
-              expand: true,
-              children: [
-                {
-                  title: 'leaf 1-2-1',
-                  expand: true,
-                  children: [],
-                  isFolder: false
-                },
-                {
-                  title: 'leaf 1-2-1',
-                  expand: true,
-                  children: [],
-                  isFolder: false
-                }
-              ],
-              isFolder: true
-            }
-          ]
-        }
-      ]
-    }
-  },
   methods: {
     renderContent (h, { root, node, data }) {
       return h('span', {
@@ -146,6 +69,11 @@ export default {
       } else {
         return 'ios-paper-outline'
       }
+    }
+  },
+  computed: {
+    data: function () {
+      return this.$store.state.tree
     }
   }
 }

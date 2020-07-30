@@ -10,6 +10,60 @@ export default new Vuex.Store({
       { id: 2, title: '開発環境', body: '# test \n- test2', opend: false },
       { id: 3, title: 'メモ', body: '# test \n- test3', opend: false }
     ],
+    tree: [
+      {
+        title: '粟田恭介',
+        expand: true,
+        render: (h, { root, node, data }) => {
+          return h('span', {
+            style: {
+              display: 'inline-block',
+              width: '100%'
+            }
+          }, [
+            h('span', [
+              h('Icon', {
+                props: {
+                  type: 'ios-folder-outline'
+                },
+                style: {
+                  marginRight: '0.5em'
+                }
+              }),
+              h('span', data.title)
+            ]),
+            h('span', {
+              style: {
+                display: 'inline-block',
+                float: 'right',
+                marginRight: '2.3em'
+              }
+            })
+          ])
+        },
+        children: [
+          {
+            title: 'メモ',
+            expand: true,
+            children: [
+              {
+                title: '買い物リスト',
+                expand: true,
+                children: [],
+                isFolder: false
+              },
+              {
+                title: 'パスワード',
+                expand: true,
+                children: [],
+                isFolder: false
+              }
+            ],
+            isFolder: true
+          }
+        ]
+      }
+    ],
     editable: true,
     selectDocumentId: 0,
     openDocumentId: []
