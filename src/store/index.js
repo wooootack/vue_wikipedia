@@ -80,7 +80,12 @@ export default new Vuex.Store({
   },
   mutations: {
     closeDocument (state, id) {
-      state.openDocumentId = state.openDocumentId.filter(x => x.id !== id)
+      state.openDocumentId = state.openDocumentId.filter(x => x !== id)
+      if (state.openDocumentId.length > 0) {
+        state.selectDocumentId = state.openDocumentId[0]
+      } else {
+        state.selectDocumentId = undefined
+      }
     },
     openDocument (state, id) {
       if (state.openDocumentId.includes(id)) {

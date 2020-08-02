@@ -1,7 +1,7 @@
 <template>
   <div class="home-container">
 
-      <Header :class="edit" />
+    <Header :class="edit" />
 
     <div :class="[show, 'tabs']">
       <TabItem
@@ -43,7 +43,6 @@ export default {
   computed: {
     currentBody () {
       const current = this.$store.state.documents.find(x => x.id === this.$store.state.selectDocumentId)
-      console.log(current)
       if (current === undefined) {
         return ''
       }
