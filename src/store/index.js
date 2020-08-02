@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    list: [
+    documents: [
       { id: 1, title: 'アプリケーションの使い方', body: '# test \n- test1', opend: false },
       { id: 2, title: '開発環境', body: '# test \n- test2', opend: false },
       { id: 3, title: 'メモ', body: '# test \n- test3', opend: false }
@@ -47,15 +47,22 @@ export default new Vuex.Store({
             expand: true,
             children: [
               {
-                title: '買い物リスト',
-                expand: true,
+                document_id: 1,
+                title: 'アプリケーションの使い方',
                 children: [],
                 isFolder: false,
                 contextmenu: true
               },
               {
-                title: 'パスワード',
-                expand: true,
+                document_id: 2,
+                title: '開発環境',
+                children: [],
+                isFolder: false,
+                contextmenu: true
+              },
+              {
+                document_id: 3,
+                title: 'サンプル',
                 children: [],
                 isFolder: false,
                 contextmenu: true
@@ -64,11 +71,10 @@ export default new Vuex.Store({
             isFolder: true,
             contextmenu: true
           }
-        ],
-        contextmenu: true
+        ]
       }
     ],
-    editable: true,
+    editable: false,
     selectDocumentId: 0,
     openDocumentId: []
   },

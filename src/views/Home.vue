@@ -42,7 +42,7 @@ export default {
   },
   computed: {
     currentBody () {
-      const current = this.$store.state.list.find(x => x.id === this.$store.state.selectDocumentId)
+      const current = this.$store.state.documents.find(x => x.id === this.$store.state.selectDocumentId)
       console.log(current)
       if (current === undefined) {
         return ''
@@ -50,7 +50,7 @@ export default {
       return current.body
     },
     openedDocument () {
-      return this.$store.state.list.filter(x => this.$store.state.openDocumentId.includes(x.id))
+      return this.$store.state.documents.filter(x => this.$store.state.openDocumentId.includes(x.id))
     },
     show () {
       return this.$store.state.editable ? 'hide' : false

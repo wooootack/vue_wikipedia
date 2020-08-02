@@ -73,7 +73,7 @@ export default {
       this.contextData = data
     },
     handleOpen () {
-      this.$Message.info(this.contextData.title)
+      this.$store.commit('openDocument', this.contextData.document_id)
     },
     handleNwFile () {
       this.$Message.info(this.contextData.title)
