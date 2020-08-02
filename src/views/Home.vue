@@ -1,6 +1,8 @@
 <template>
   <div class="home-container">
 
+      <Header :class="edit" />
+
     <div :class="[show, 'tabs']">
       <TabItem
         v-for="item in openedDocument"
@@ -13,13 +15,7 @@
     </div>
 
     <div :class="[edit, 'new-container']">
-      <div class="input-container">
-        <Input class="title-input" v-model='keyword' placeholder='タイトル' />
-        <Input class="path-input" v-model='keyword' placeholder='階層' />
-      </div>
-
       <MarkdownEditor class="editor-box" />
-
     </div>
 
   </div>
@@ -28,8 +24,8 @@
 <script>
 import TabItem from '@/components/organisms/TabItem.vue'
 import MarkdownViewer from '@/components/organisms/MarkdownViewer'
-import Input from '@/components/atoms/Input.vue'
 import MarkdownEditor from '@/components/organisms/MarkdownEditor.vue'
+import Header from '@/components/organisms/Header'
 
 export default {
   data: function () {
@@ -42,7 +38,7 @@ export default {
     TabItem,
     MarkdownViewer,
     MarkdownEditor,
-    Input
+    Header
   },
   computed: {
     currentBody () {

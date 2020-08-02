@@ -10,8 +10,6 @@
 
     <div class="main-container">
 
-      <Header />
-
       <router-view/>
 
     </div>
@@ -23,13 +21,11 @@
 <script>
 import 'normalize.css'
 import Tree from '@/components/organisms/Tree'
-import Header from '@/components/organisms/Header'
 
 export default {
   name: 'App',
   components: {
-    Tree,
-    Header
+    Tree
   }
 }
 </script>
