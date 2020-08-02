@@ -50,18 +50,22 @@ export default new Vuex.Store({
                 title: '買い物リスト',
                 expand: true,
                 children: [],
-                isFolder: false
+                isFolder: false,
+                contextmenu: true
               },
               {
                 title: 'パスワード',
                 expand: true,
                 children: [],
-                isFolder: false
+                isFolder: false,
+                contextmenu: true
               }
             ],
-            isFolder: true
+            isFolder: true,
+            contextmenu: true
           }
-        ]
+        ],
+        contextmenu: true
       }
     ],
     editable: true,
