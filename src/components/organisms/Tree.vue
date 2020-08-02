@@ -2,8 +2,11 @@
   <div class="container">
     <Tree :data="data" :render="renderContent" @on-contextmenu="handleContextMenu" class="demo-tree-render">
       <template slot="contextMenu">
-          <DropdownItem @click.native="handleContextMenuEdit">新規</DropdownItem>
-          <DropdownItem @click.native="handleContextMenuDelete" style="color: #ed4014">削除</DropdownItem>
+          <DropdownItem @click.native="handleOpen">開く</DropdownItem>
+          <DropdownItem @click.native="handleNwFile">新しいファイル</DropdownItem>
+          <DropdownItem @click.native="handleNewFolder">新しいフォルダ</DropdownItem>
+          <DropdownItem @click.native="handleChangeName">名前の変更</DropdownItem>
+          <DropdownItem @click.native="handleDelete">削除</DropdownItem>
       </template>
     </Tree>
   </div>
@@ -69,11 +72,20 @@ export default {
     handleContextMenu (data) {
       this.contextData = data
     },
-    handleContextMenuEdit () {
-      this.$Message.info('Click edit of ' + this.contextData.title)
+    handleOpen () {
+      this.$Message.info(this.contextData.title)
     },
-    handleContextMenuDelete () {
-      this.$Message.info('Click delete of ' + this.contextData.title)
+    handleNwFile () {
+      this.$Message.info(this.contextData.title)
+    },
+    handleNewFolder () {
+      this.$Message.info(this.contextData.title)
+    },
+    handleChangeName () {
+      this.$Message.info(this.contextData.title)
+    },
+    handleDelete () {
+      this.$Message.info(this.contextData.title)
     }
   },
   computed: {
