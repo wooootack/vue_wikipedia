@@ -74,7 +74,6 @@ export default new Vuex.Store({
         ]
       }
     ],
-    editable: false,
     selectDocumentId: 0,
     openDocumentId: []
   },
@@ -97,8 +96,20 @@ export default new Vuex.Store({
     selectDocument (state, id) {
       state.selectDocumentId = id
     },
-    modeChange (state, editable) {
-      state.editable = editable
+    saveDocument (state, params) {
+      const index = state.documents.findIndex(x => x.id === params.id)
+      if (index >= 0) {
+        state.documents[index].body = params.body
+      }
+    }
+  },
+  getters: {
+    currentBody (state) {
+      const current = state.documents.find(x => x.id === state.selectDocumentId)
+      if (current === undefined) {
+        return ''
+      }
+      return current.body
     }
   },
   actions: {

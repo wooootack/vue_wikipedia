@@ -16,10 +16,10 @@ export default {
 
   methods: {
     clickSave () {
-      console.log('save')
+      this.$emit('save')
     },
     clickReturn () {
-      this.$store.commit('modeChange', false)
+      this.$router.push('/show')
     }
   }
 

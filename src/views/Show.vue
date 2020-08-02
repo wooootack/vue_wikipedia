@@ -1,21 +1,15 @@
 <template>
   <div class="home-container">
 
-    <Header :class="edit" />
-
-    <div :class="[show, 'tabs']">
+    <div class="tabs">
       <TabItem
         v-for="item in openedDocument"
         v-bind="item" :key="item.id"
         @tabClose="tabClose" />
     </div>
-    <div :class="[show, 'contents']">
+    <div class="contents">
       <MarkdownViewer
         :body="currentBody" />
-    </div>
-
-    <div :class="[edit, 'new-container']">
-      <MarkdownEditor class="editor-box" />
     </div>
 
   </div>
@@ -24,8 +18,6 @@
 <script>
 import TabItem from '@/components/organisms/TabItem.vue'
 import MarkdownViewer from '@/components/organisms/MarkdownViewer'
-import MarkdownEditor from '@/components/organisms/MarkdownEditor.vue'
-import Header from '@/components/organisms/Header'
 
 export default {
   data: function () {
@@ -36,31 +28,22 @@ export default {
   components:
   {
     TabItem,
-    MarkdownViewer,
-    MarkdownEditor,
-    Header
+    MarkdownViewer
   },
   computed: {
     currentBody () {
-      const current = this.$store.state.documents.find(x => x.id === this.$store.state.selectDocumentId)
-      if (current === undefined) {
-        return ''
-      }
-      return current.body
+      return this.$store.getters.currentBody
     },
     openedDocument () {
       return this.$store.state.documents.filter(x => this.$store.state.openDocumentId.includes(x.id))
-    },
-    show () {
-      return this.$store.state.editable ? 'hide' : false
-    },
-    edit () {
-      return this.$store.state.editable ? false : 'hide'
     }
   },
   methods: {
     tabClose (id) {
       this.$store.commit('closeDocument', id)
+    },
+    save () {
+      console.log(this.$store.selectDocumentId)
     }
   }
 }
@@ -106,10 +89,6 @@ export default {
   transform: translateX(100%);
 }
 
-.new-container {
-  height: 100%;
-}
-
 .input-container {
   display: flex;
   justify-content: space-around;
@@ -123,10 +102,6 @@ export default {
 .path-input {
   display:inline-flex;
   flex:1;
-}
-
-.editor-box {
-  height: 90%;
 }
 
 </style>

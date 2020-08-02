@@ -6,6 +6,7 @@
           <DropdownItem @click.native="handleNwFile">新しいファイル</DropdownItem>
           <DropdownItem @click.native="handleNewFolder">新しいフォルダ</DropdownItem>
           <DropdownItem @click.native="handleChangeName">名前の変更</DropdownItem>
+          <DropdownItem @click.native="handleEdit">文書の編集</DropdownItem>
           <DropdownItem @click.native="handleDelete">削除</DropdownItem>
       </template>
     </Tree>
@@ -86,6 +87,9 @@ export default {
     },
     handleDelete () {
       this.$Message.info(this.contextData.title)
+    },
+    handleEdit () {
+      this.$router.push(`/edit/${this.contextData.document_id}`)
     }
   },
   computed: {

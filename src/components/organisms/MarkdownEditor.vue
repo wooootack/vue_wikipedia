@@ -1,20 +1,30 @@
 <template>
   <div>
+
+    <Header @save="save" />
+
     <mavon-editor
       language="ja"
       placeholder='文書を作成してください。'
-      v-model="body"
+      v-model="value"
       :counter="65535"
       :externalLink="mavonEditor.externalLink"
       :toolbars="mavonEditor.toolbars" />
+
   </div>
 </template>
 
 <script>
+import Header from '@/components/organisms/Header'
+
 export default {
+  components:
+  {
+    Header
+  },
   data () {
     return {
-      body: '',
+      value: this.$store.state.documents.find(x => x.id === Number(this.$route.params.id)).body,
       mavonEditor: {
         externalLink: {
           markdown_css: function () {
@@ -60,6 +70,11 @@ export default {
           preview: true
         }
       }
+    }
+  },
+  methods: {
+    save () {
+      this.$store.commit('saveDocument', { id: Number(this.$route.params.id), body: this.value })
     }
   }
 }
