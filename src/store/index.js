@@ -101,6 +101,12 @@ export default new Vuex.Store({
       if (index >= 0) {
         state.documents[index].body = params.body
       }
+    },
+    deleteDocument (state, id) {
+      state.documents = state.documents.filter(x => x.id !== id)
+    },
+    changeName (state, params) {
+
     }
   },
   getters: {

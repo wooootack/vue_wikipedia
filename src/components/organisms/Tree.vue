@@ -83,10 +83,12 @@ export default {
       this.$Message.info(this.contextData.title)
     },
     handleChangeName () {
+      window.prompt('名前を入力してください。')
       this.$Message.info(this.contextData.title)
     },
     handleDelete () {
-      this.$Message.info(this.contextData.title)
+      this.$store.commit('deleteDocument', this.contextData.document_id)
+      this.$Message.info(this.contextData.title + 'を削除しました。')
     },
     handleEdit () {
       this.$router.push(`/edit/${this.contextData.document_id}`)
