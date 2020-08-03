@@ -77,9 +77,11 @@ export default {
       this.$store.commit('openDocument', this.contextData.document_id)
     },
     handleNwFile () {
+      window.prompt('名前を入力してください。')
       this.$Message.info(this.contextData.title)
     },
     handleNewFolder () {
+      window.prompt('名前を入力してください。')
       this.$Message.info(this.contextData.title)
     },
     handleChangeName () {
